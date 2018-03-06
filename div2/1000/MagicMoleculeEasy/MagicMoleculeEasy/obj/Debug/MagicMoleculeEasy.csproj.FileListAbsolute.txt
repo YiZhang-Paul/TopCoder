@@ -1,1 +1,6 @@
 D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\MagicMoleculeEasy\bin\Debug\MagicMoleculeEasy.exe.config
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\MagicMoleculeEasy\bin\Debug\MagicMoleculeEasy.exe
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\MagicMoleculeEasy\bin\Debug\MagicMoleculeEasy.pdb
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\MagicMoleculeEasy\obj\Debug\MagicMoleculeEasy.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\MagicMoleculeEasy\obj\Debug\MagicMoleculeEasy.exe
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\MagicMoleculeEasy\obj\Debug\MagicMoleculeEasy.pdb
