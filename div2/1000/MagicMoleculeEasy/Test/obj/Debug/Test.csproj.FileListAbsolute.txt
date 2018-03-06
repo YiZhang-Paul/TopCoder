@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\bin\Debug\MagicMoleculeEasy.exe
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\bin\Debug\MagicMoleculeEasy.pdb
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div2\1000\MagicMoleculeEasy\Test\obj\Debug\Test.pdb

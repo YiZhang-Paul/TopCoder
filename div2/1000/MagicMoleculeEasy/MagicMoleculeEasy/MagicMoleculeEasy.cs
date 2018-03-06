@@ -7,42 +7,46 @@ using System.Threading.Tasks;
 namespace MagicMoleculeEasy {
     public class MagicMoleculeEasy {
 
-        private void AddBond(int index1, int index2, HashSet<string> bonds) {
+        //get representation of bond between atoms
+        private string GetKey(int atom1, int atom2) {
 
-            string key1 = index1 + "," + index2;
-            string key2 = index2 + "," + index1;
+            return atom1 + "," + atom2;
+        }
 
-            if(!bonds.Contains(key1) && !bonds.Contains(key2)) {
+        //record unique bond between two atoms
+        private void AddBond(int atom1, int atom2, HashSet<string> bonds) {
 
-                bonds.Add(key1);
+            if(!bonds.Contains(GetKey(atom2, atom1))) {
+
+                bonds.Add(GetKey(atom1, atom2));
             }
         }
 
-        private void RemoveBond(int index1, int index2, HashSet<string> bonds) {
+        private void RemoveBond(int atom1, int atom2, HashSet<string> bonds, bool removeOther = true) {
 
-            string key1 = index1 + "," + index2;
-            string key2 = index2 + "," + index1;
+            string key = GetKey(atom1, atom2);
 
-            if(bonds.Contains(key1)) {
+            if(bonds.Contains(key)) {
 
-                bonds.Remove(key1);
+                bonds.Remove(key);
             }
 
-            if(bonds.Contains(key2)) {
-
-                bonds.Remove(key2);
+            if(removeOther) {
+                //in case the bond is represented in another form
+                RemoveBond(atom2, atom1, bonds, false);
             }
         }
 
-        private HashSet<string> GetBonds(string[] magicBond) {
+        //record all unique bonds between all atoms
+        private HashSet<string> GetBonds(string[] relations) {
 
             var bonds = new HashSet<string>();
 
-            for(int i = 0; i < magicBond.Length; i++ ) {
+            for(int i = 0; i < relations.Length; i++) {
 
-                for(int j = 0; j < magicBond[i].Length; j++) {
+                for(int j = 0; j < relations[i].Length; j++) {
 
-                    if(magicBond[i][j] == 'Y') {
+                    if(relations[i][j] == 'Y') {
 
                         AddBond(i, j, bonds);
                     }
@@ -52,43 +56,45 @@ namespace MagicMoleculeEasy {
             return bonds;
         }
 
-        private List<int[]> GetCombination(int[] indexes, int total, int[] current, List<int[]> collection) {
+        private List<int[]> GetSubsets(int[] atoms, int total, int[] current, List<int[]> subsets) {
 
             current = current ?? new int[total];
-            collection = collection ?? new List<int[]>();
+            subsets = subsets ?? new List<int[]>();
 
             if(total == 0) {
 
-                collection.Add(current.ToArray());
+                subsets.Add(current.ToArray());
 
                 return null;
             }
 
-            for(int i = 0; i < indexes.Length; i++) {
+            for(int i = 0; i < atoms.Length; i++) {
 
-                current[current.Length - total] = indexes[i];
-                GetCombination(indexes.Skip(i + 1).ToArray(), total - 1, current, collection);
+                current[current.Length - total] = atoms[i];
+                int[] otherAtoms = atoms.Skip(i + 1).ToArray();
+                GetSubsets(otherAtoms, total - 1, current, subsets);
             }
 
-            return collection;
+            return subsets;
         }
 
-        private int GetPower(int[] selection, int[] magicPower) {
+        private int CalculatePower(int[] subset, int[] powers) {
 
-            return selection.Aggregate(0, (total, index) => total + magicPower[index]);
+            return subset.Aggregate(0, (power, atom) => power + powers[atom]);
         }
 
-        private bool IsValidSelection(int[] selection, string[] magicBond) {
+        //check if all bonds are covered by atoms in a given subset
+        private bool IsValid(int[] subset, string[] relations) {
 
-            var bonds = GetBonds(magicBond);
+            var bonds = GetBonds(relations);
 
-            foreach(var index in selection) {
+            foreach(var atom in subset) {
 
-                for(int i = 0; i < magicBond[index].Length; i++) {
+                for(int i = 0; i < relations[atom].Length; i++) {
 
-                    if(magicBond[index][i] == 'Y') {
+                    if(relations[atom][i] == 'Y') {
 
-                        RemoveBond(index, i, bonds);
+                        RemoveBond(atom, i, bonds);
                     }
                 }
             }
@@ -96,16 +102,16 @@ namespace MagicMoleculeEasy {
             return bonds.Count == 0;
         }
 
-        public int maxMagicPower(int[] magicPower, string[] magicBond, int k) {
+        public int maxMagicPower(int[] powers, string[] relations, int size) {
 
-            var combinations = GetCombination(Enumerable.Range(0, magicPower.Length).ToArray(), k, null, null);
             int maxPower = -1;
+            int[] atoms = Enumerable.Range(0, powers.Length).ToArray();
 
-            foreach(var combination in combinations) {
+            foreach(var subset in GetSubsets(atoms, size, null, null)) {
 
-                if(IsValidSelection(combination, magicBond)) {
+                if(IsValid(subset, relations)) {
 
-                    maxPower = Math.Max(maxPower, GetPower(combination, magicPower));
+                    maxPower = Math.Max(maxPower, CalculatePower(subset, powers));
                 }
             }
 
