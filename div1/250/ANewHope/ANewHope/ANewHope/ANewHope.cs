@@ -7,20 +7,29 @@ using System.Threading.Tasks;
 namespace ANewHope {
     public class ANewHope {
 
-        private int[] ToNextWeek(int[] week, int daysToDry) {
+        //wear T-shirst as soons as they are dry
+        private void WearWhenDry(ref int[] current, int daysToDry) {
 
-            return week.Skip(week.Length - daysToDry)
-                       .Concat(week.Take(week.Length - daysToDry))
-                       .ToArray();
+            int shiftPoint = current.Length - daysToDry;
+            //shift every T-shirt by total days to dry
+            current = current.Skip(shiftPoint)
+                             .Concat(current.Take(shiftPoint))
+                             .ToArray();
         }
 
-        private bool IsValid(int[] current, int[] target, int daysToDry) {
+        private int DaysBetween(int start, int end, int daysInWeek) {
+
+            return (daysInWeek - start - 1) + (end + 1);
+        }
+
+        //check if T-shirts can dry before corresponding days in target week
+        private bool CanDryBefore(int[] current, int[] target, int daysToDry) {
 
             for(int i = 0; i < current.Length; i++) {
 
-                int days = Array.IndexOf(target, current[i]) + current.Length - i;
+                int targetDay = Array.IndexOf(target, current[i]);
 
-                if(days < daysToDry) {
+                if(DaysBetween(i, targetDay, current.Length) < daysToDry) {
 
                     return false;
                 }
@@ -31,16 +40,20 @@ namespace ANewHope {
 
         public int count(int[] firstWeek, int[] lastWeek, int daysToDry) {
 
-            int weeks = 1;
-            int[] current = firstWeek;
+            if(CanDryBefore(firstWeek, lastWeek, daysToDry)) {
 
-            while(!IsValid(current, lastWeek, daysToDry)) {
+                return 1;
+            }
+            //include first and last week on default
+            int total = 2;
 
-                current = ToNextWeek(current, daysToDry);
-                weeks++;
+            while(!CanDryBefore(firstWeek, lastWeek, daysToDry)) {
+
+                WearWhenDry(ref firstWeek, daysToDry);
+                total++;
             }
 
-            return weeks == 1 ? weeks : weeks + 1;
+            return total;
         }
     }
 }
