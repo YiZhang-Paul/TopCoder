@@ -1,1 +1,6 @@
 D:\all_languages\topcoder\div2\250\StringHalving\StringHalving\bin\Debug\StringHalving.exe.config
+D:\all_languages\topcoder\div2\250\StringHalving\StringHalving\bin\Debug\StringHalving.exe
+D:\all_languages\topcoder\div2\250\StringHalving\StringHalving\bin\Debug\StringHalving.pdb
+D:\all_languages\topcoder\div2\250\StringHalving\StringHalving\obj\Debug\StringHalving.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\StringHalving\StringHalving\obj\Debug\StringHalving.exe
+D:\all_languages\topcoder\div2\250\StringHalving\StringHalving\obj\Debug\StringHalving.pdb
