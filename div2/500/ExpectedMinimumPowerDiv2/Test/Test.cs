@@ -41,7 +41,7 @@ namespace Test {
         [TestMethod]
         public void Sample5() {
 
-            Assert.AreEqual(9.906688596554163, minPower.findExp(50, 25));
+            Assert.AreEqual(9.90668859655418, minPower.findExp(50, 25));
         }
 
         [TestMethod]

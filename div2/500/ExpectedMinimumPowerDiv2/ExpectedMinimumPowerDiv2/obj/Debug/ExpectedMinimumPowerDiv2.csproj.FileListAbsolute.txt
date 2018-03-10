@@ -3,3 +3,4 @@ D:\all_languages\topcoder\div2\500\ExpectedMinimumPowerDiv2\ExpectedMinimumPower
 D:\all_languages\topcoder\div2\500\ExpectedMinimumPowerDiv2\ExpectedMinimumPowerDiv2\bin\Debug\ExpectedMinimumPowerDiv2.pdb
 D:\all_languages\topcoder\div2\500\ExpectedMinimumPowerDiv2\ExpectedMinimumPowerDiv2\obj\Debug\ExpectedMinimumPowerDiv2.exe
 D:\all_languages\topcoder\div2\500\ExpectedMinimumPowerDiv2\ExpectedMinimumPowerDiv2\obj\Debug\ExpectedMinimumPowerDiv2.pdb
+D:\all_languages\topcoder\div2\500\ExpectedMinimumPowerDiv2\ExpectedMinimumPowerDiv2\obj\Debug\ExpectedMinimumPowerDiv2.csprojResolveAssemblyReference.cache
