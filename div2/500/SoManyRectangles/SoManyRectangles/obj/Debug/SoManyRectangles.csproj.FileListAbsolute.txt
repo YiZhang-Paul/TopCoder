@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\500\SoManyRectangles\SoManyRectangles\bin\Debug\SoManyRectangles.exe.config
+D:\all_languages\topcoder\div2\500\SoManyRectangles\SoManyRectangles\bin\Debug\SoManyRectangles.exe
+D:\all_languages\topcoder\div2\500\SoManyRectangles\SoManyRectangles\bin\Debug\SoManyRectangles.pdb
+D:\all_languages\topcoder\div2\500\SoManyRectangles\SoManyRectangles\obj\Debug\SoManyRectangles.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\500\SoManyRectangles\SoManyRectangles\obj\Debug\SoManyRectangles.exe
+D:\all_languages\topcoder\div2\500\SoManyRectangles\SoManyRectangles\obj\Debug\SoManyRectangles.pdb

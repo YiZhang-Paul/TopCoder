@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\bin\Debug\SoManyRectangles.exe
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\bin\Debug\SoManyRectangles.pdb
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div2\500\SoManyRectangles\Test\obj\Debug\Test.pdb
