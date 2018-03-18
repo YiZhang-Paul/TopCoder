@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 namespace RingLex {
     public class RingLex {
 
-        private string GenerateText(string text, int offset, int step) {
+        //generate new text base on given offset and step
+        private string CreateText(string old, int offset, int step) {
 
-            var newText = new StringBuilder();
+            var text = new StringBuilder();
 
-            for(int i = 0; i < text.Length; i++) {
+            for(int i = 0; i < old.Length; i++) {
 
-                newText.Append(text[(offset + i * step) % text.Length]);
+                text.Append(old[(offset + i * step) % old.Length]);
             }
 
-            return newText.ToString();
+            return text.ToString();
         }
 
         private bool IsPrime(int number) {
@@ -32,45 +33,29 @@ namespace RingLex {
             return true;
         }
 
-        private string GetSmallerText(string text1, string text2) {
+        //choose lexicographically smaller string
+        private string PickSmaller(string text1, string text2) {
 
-            for(int i = 0; i < text1.Length; i++) {
-
-                if(text1[i] != text2[i]) {
-
-                    return text1[i] < text2[i] ? text1 : text2;
-                }
-            }
-
-            return text1;
+            return text1.CompareTo(text2) < 0 ? text1 : text2;
         }
 
-        public string getmin(string text) {
+        public string getmin(string old) {
 
-            if(new HashSet<char>(text).Count == 1) {
-
-                return text;
-            }
-
-            string min = "";
-
-            for(int i = 0; i < text.Length; i++) {
-
-                for(int j = 2; j < text.Length; j++) {
+            string minimum = null;
+            //offset
+            for(int i = 0; i < old.Length; i++) {
+                //step
+                for(int j = 2; j < old.Length; j++) {
 
                     if(IsPrime(j)) {
-
-                        string newText = GenerateText(text, i, j);
-
-                        if(newText != text) {
-
-                            min = min == "" ? newText : GetSmallerText(min, newText);
-                        }
+                        //find lexicographically smallest string
+                        string text = CreateText(old, i, j);
+                        minimum = minimum == null ? text : PickSmaller(minimum, text);
                     }
                 }
             }
 
-            return min;
+            return minimum;
         }
     }
 }
