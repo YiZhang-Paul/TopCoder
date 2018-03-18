@@ -7,83 +7,148 @@ using System.Threading.Tasks;
 namespace MagicMoleculeEasy {
     public class MagicMoleculeEasy {
 
+        private string GetKey(int atom1, int atom2) {
+
+            return atom1 < atom2 ? atom1 + "," + atom2 : atom2 + "," + atom1;
+        }
+
+        private Dictionary<string, int[]> GetBonds(string[] relations) {
+
+            var bonds = new Dictionary<string, int[]>();
+
+            for(int i = 0; i < relations.Length; i++) {
+
+                for(int j = 0; j < relations[i].Length; j++) {
+
+                    if(relations[i][j] == 'Y') {
+
+                        bonds[GetKey(i, j)] = new int[] { i, j };
+                    }
+                }
+            }
+
+            return bonds;
+        }
+
+        private int SumLargestPowers(int[] powers, int total) {
+
+            return powers.OrderByDescending(power => power).Take(total).Sum();
+        }
+
         private int[] GetAtoms(int total) {
 
             return Enumerable.Range(0, total).ToArray();
         }
 
-        private bool IsValid(int[] subset, string[] relations) {
+        private int[] GetUnused(int[] candidate, List<int> used) {
 
-            var atoms = new HashSet<int>(subset);
+            var toCheck = new HashSet<int>(used);
 
-            for(int i = 0; i < relations.Length; i++) {
+            return candidate.Where(atom => !toCheck.Contains(atom)).ToArray();
+        }
 
-                if(atoms.Contains(i)) {
+        private List<int> Concat(List<int> subset, int atom) {
 
-                    continue;
-                }
+            return subset.Concat(new List<int>() { atom }).ToList();
+        }
 
-                for(int j = 0; j < relations[i].Length; j++) {
+        private string[] GetUnsatisfied(string[] keys, Dictionary<string, int[]> bonds, List<int> subset) {
 
-                    if(relations[i][j] == 'Y' && !atoms.Contains(i) && !atoms.Contains(j)) {
+            var used = new HashSet<int>(subset);
 
-                        return false;
-                    }
-                }
+            return keys.Where(key => bonds[key].All(atom => !used.Contains(atom))).ToArray();
+        }
+
+        private int[] RemoveIndex(int[] array, int index) {
+
+            return array.Take(index).Concat(array.Skip(index + 1)).ToArray();
+        }
+
+        private int FillToMaxPowers(List<int> subset, int toFill, int[] atoms, int[] powers) {
+
+            var unusedPower = GetUnused(atoms, subset).Select(atom => powers[atom]).ToArray();
+
+            if(toFill > unusedPower.Length) {
+
+                return -1;
             }
 
-            return true;
+            return GetPower(subset, powers) + unusedPower.Take(toFill).Sum();
         }
 
-        private int GetPower(int[] subset, int[] powers) {
+        private int GetPower(List<int> subset, int[] powers) {
 
-            return subset.Sum(atom => powers[atom]);
+            return subset.Select(atom => powers[atom]).Sum();
         }
 
-        private void TestSubsets(
+        private void GetMaxPower(
 
-            int[] atoms,
-            int counter,
-            int[] subset,
-            string[] relations,
+            string[] keys,
+            Dictionary<string, int[]> bonds,
+            List<int> subset,
+            int size,
             int[] powers,
+            int[] atoms,
             ref int max
+
         ) {
 
-            if(counter == subset.Length || atoms.Length == 0) {
+            keys = GetUnsatisfied(keys, bonds, subset);
 
-                if(counter == subset.Length) {
+            if(keys.Length == 0) {
 
-                    int power = GetPower(subset, powers);
-                    max = power > max && IsValid(subset, relations) ? power : max;
+                max = Math.Max(max, FillToMaxPowers(subset, size - subset.Count, atoms, powers));
+
+                return;
+            }
+
+            if(subset.Count == size) {
+
+                if(keys.Length == 0) {
+
+                    max = Math.Max(max, GetPower(subset, powers));
                 }
 
                 return;
             }
 
-            for(int i = 0; i < atoms.Length; i++) {
+            foreach(string key in keys) {
 
-                var others = atoms.Skip(i + 1).ToArray();
-                subset[counter] = atoms[i];
-                TestSubsets(others, counter + 1, subset, relations, powers, ref max);
+                var unused = GetUnused(bonds[key], subset);
+
+                if(unused.Length == bonds[key].Length) {
+
+                    foreach(var atom in unused) {
+
+                        GetMaxPower(keys, bonds, Concat(subset, atom), size, powers, atoms, ref max);
+                    }
+                }
             }
         }
 
         public int maxMagicPower(int[] powers, string[] relations, int size) {
 
-            int maxPower = -1;
+            var bonds = GetBonds(relations);
 
-            TestSubsets(
+            if(bonds.Count == 0) {
 
-                GetAtoms(powers.Length),
-                0,
-                new int[size],
-                relations,
+                return SumLargestPowers(powers, size);
+            }
+
+            int max = -1;
+
+            GetMaxPower(
+
+                bonds.Select(pair => pair.Key).ToArray(),
+                bonds,
+                new List<int>(),
+                size,
                 powers,
-                ref maxPower
+                GetAtoms(powers.Length),
+                ref max
             );
 
-            return maxPower;
+            return max;
         }
     }
 }
