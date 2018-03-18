@@ -7,113 +7,81 @@ using System.Threading.Tasks;
 namespace MagicMoleculeEasy {
     public class MagicMoleculeEasy {
 
-        //get representation of bond between atoms
-        private string GetKey(int atom1, int atom2) {
+        private int[] GetAtoms(int total) {
 
-            return atom1 + "," + atom2;
+            return Enumerable.Range(0, total).ToArray();
         }
 
-        //record unique bond between two atoms
-        private void AddBond(int atom1, int atom2, HashSet<string> bonds) {
+        private bool IsValid(int[] subset, string[] relations) {
 
-            if(!bonds.Contains(GetKey(atom2, atom1))) {
-
-                bonds.Add(GetKey(atom1, atom2));
-            }
-        }
-
-        private void RemoveBond(int atom1, int atom2, HashSet<string> bonds, bool removeOther = true) {
-
-            string key = GetKey(atom1, atom2);
-
-            if(bonds.Contains(key)) {
-
-                bonds.Remove(key);
-            }
-
-            if(removeOther) {
-                //in case the bond is represented in another form
-                RemoveBond(atom2, atom1, bonds, false);
-            }
-        }
-
-        //record all unique bonds between all atoms
-        private HashSet<string> GetBonds(string[] relations) {
-
-            var bonds = new HashSet<string>();
+            var atoms = new HashSet<int>(subset);
 
             for(int i = 0; i < relations.Length; i++) {
 
+                if(atoms.Contains(i)) {
+
+                    continue;
+                }
+
                 for(int j = 0; j < relations[i].Length; j++) {
 
-                    if(relations[i][j] == 'Y') {
+                    if(relations[i][j] == 'Y' && !atoms.Contains(i) && !atoms.Contains(j)) {
 
-                        AddBond(i, j, bonds);
+                        return false;
                     }
                 }
             }
 
-            return bonds;
+            return true;
         }
 
-        private List<int[]> GetSubsets(int[] atoms, int total, int[] current, List<int[]> subsets) {
+        private int GetPower(int[] subset, int[] powers) {
 
-            current = current ?? new int[total];
-            subsets = subsets ?? new List<int[]>();
+            return subset.Sum(atom => powers[atom]);
+        }
 
-            if(total == 0) {
+        private void TestSubsets(
 
-                subsets.Add(current.ToArray());
+            int[] atoms,
+            int counter,
+            int[] subset,
+            string[] relations,
+            int[] powers,
+            ref int max
+        ) {
 
-                return null;
+            if(counter == subset.Length || atoms.Length == 0) {
+
+                if(counter == subset.Length) {
+
+                    int power = GetPower(subset, powers);
+                    max = power > max && IsValid(subset, relations) ? power : max;
+                }
+
+                return;
             }
 
             for(int i = 0; i < atoms.Length; i++) {
 
-                current[current.Length - total] = atoms[i];
-                int[] otherAtoms = atoms.Skip(i + 1).ToArray();
-                GetSubsets(otherAtoms, total - 1, current, subsets);
+                var others = atoms.Skip(i + 1).ToArray();
+                subset[counter] = atoms[i];
+                TestSubsets(others, counter + 1, subset, relations, powers, ref max);
             }
-
-            return subsets;
-        }
-
-        private int CalculatePower(int[] subset, int[] powers) {
-
-            return subset.Aggregate(0, (power, atom) => power + powers[atom]);
-        }
-
-        //check if all bonds are covered by atoms in a given subset
-        private bool IsValid(int[] subset, string[] relations) {
-
-            var bonds = GetBonds(relations);
-
-            foreach(var atom in subset) {
-
-                for(int i = 0; i < relations[atom].Length; i++) {
-
-                    if(relations[atom][i] == 'Y') {
-
-                        RemoveBond(atom, i, bonds);
-                    }
-                }
-            }
-
-            return bonds.Count == 0;
         }
 
         public int maxMagicPower(int[] powers, string[] relations, int size) {
 
             int maxPower = -1;
-            int[] atoms = Enumerable.Range(0, powers.Length).ToArray();
 
-            foreach(var subset in GetSubsets(atoms, size, null, null)) {
+            TestSubsets(
 
-                if(IsValid(subset, relations)) {
-
-                    maxPower = Math.Max(maxPower, CalculatePower(subset, powers));
-                }
-            }
+                GetAtoms(powers.Length),
+                0,
+                new int[size],
+                relations,
+                powers,
+                ref maxPower
+            );
 
             return maxPower;
         }

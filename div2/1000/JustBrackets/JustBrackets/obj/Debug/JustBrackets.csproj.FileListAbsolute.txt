@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\1000\JustBrackets\JustBrackets\bin\Debug\JustBrackets.exe.config
+D:\all_languages\topcoder\div2\1000\JustBrackets\JustBrackets\bin\Debug\JustBrackets.exe
+D:\all_languages\topcoder\div2\1000\JustBrackets\JustBrackets\bin\Debug\JustBrackets.pdb
+D:\all_languages\topcoder\div2\1000\JustBrackets\JustBrackets\obj\Debug\JustBrackets.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\1000\JustBrackets\JustBrackets\obj\Debug\JustBrackets.exe
+D:\all_languages\topcoder\div2\1000\JustBrackets\JustBrackets\obj\Debug\JustBrackets.pdb
