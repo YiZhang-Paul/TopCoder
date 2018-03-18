@@ -6,62 +6,49 @@ using System.Threading.Tasks;
 
 namespace SoManyRectangles {
 
-    public class CustomRectangle {
+    public class SoManyRectangles {
 
-        public int X1 { get; private set; }
-        public int Y1 { get; private set; }
-        public int X2 { get; private set; }
-        public int Y2 { get; private set; }
-
-        public CustomRectangle(int x1, int y1, int x2, int y2) {
-
-            X1 = x1;
-            Y1 = y1;
-            X2 = x2;
-            Y2 = y2;
-        }
-
-        public static bool IsOverlap(CustomRectangle first, CustomRectangle second) {
-            //check if either rectangle's left edge is greater or equal to other rectangle's right edge
-            if(first.X1 >= second.X2 || second.X1 >= first.X2) {
+        //check if a point is inside given rectangle
+        private bool Contains(int x, int y, int x1, int y1, int x2, int y2) {
+            //intersection cannot touch the right edge of rectangle
+            if(x < x1 || x >= x2) {
 
                 return false;
             }
-            //check if either rectangle's bottom edge is greater or equal to other rectangle's top edge
-            if(first.Y1 >= second.Y2 || second.Y1 >= first.Y2) {
+            //intersection cannot touch the top edge of rectangle
+            if(y < y1 || y >= y2) {
 
                 return false;
             }
 
             return true;
         }
-    }
-
-    public class SoManyRectangles {
 
         public int maxOverlap(int[] x1, int[] y1, int[] x2, int[] y2) {
 
-            int max = 0;
+            int[] allX = x1.Concat(x2).ToArray();
+            int[] allY = y1.Concat(y2).ToArray();
+            int overlaps = 0;
+            //test all intersections
+            foreach(int x in allX) {
 
-            for(int i = 0; i < x1.Length; i++) {
+                foreach(int y in allY) {
 
-                int overlap = 0;
-                var current = new CustomRectangle(x1[i], y1[i], x2[i], y2[i]);
+                    int current = 0;
 
-                for(int j = 0; j < x1.Length; j++) {
+                    for(int i = 0; i < x1.Length; i++) {
+                        //check if current intersection is inside rectangles
+                        if(Contains(x, y, x1[i], y1[i], x2[i], y2[i])) {
 
-                    var other = new CustomRectangle(x1[j], y1[j], x2[j], y2[j]);
-
-                    if(CustomRectangle.IsOverlap(current, other)) {
-
-                        overlap++;
+                            current++;
+                        }
                     }
-                }
 
-                max = Math.Max(max, overlap);
+                    overlaps = Math.Max(overlaps, current);
+                }
             }
 
-            return max;
+            return overlaps;
         }
     }
 }
