@@ -1,0 +1,5 @@
+D:\all_languages\topcoder\div2\500\DancingClass\DancingClass\bin\Debug\DancingClass.exe.config
+D:\all_languages\topcoder\div2\500\DancingClass\DancingClass\bin\Debug\DancingClass.exe
+D:\all_languages\topcoder\div2\500\DancingClass\DancingClass\bin\Debug\DancingClass.pdb
+D:\all_languages\topcoder\div2\500\DancingClass\DancingClass\obj\Debug\DancingClass.exe
+D:\all_languages\topcoder\div2\500\DancingClass\DancingClass\obj\Debug\DancingClass.pdb

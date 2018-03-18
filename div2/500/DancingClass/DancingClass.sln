@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DancingClass", "DancingClass\DancingClass.csproj", "{3FEF3C6F-075E-4DF0-AB5C-1466DE870594}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{675BDF44-53C1-4A5F-8155-A2D6AC0F3E54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FEF3C6F-075E-4DF0-AB5C-1466DE870594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FEF3C6F-075E-4DF0-AB5C-1466DE870594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FEF3C6F-075E-4DF0-AB5C-1466DE870594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FEF3C6F-075E-4DF0-AB5C-1466DE870594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{675BDF44-53C1-4A5F-8155-A2D6AC0F3E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{675BDF44-53C1-4A5F-8155-A2D6AC0F3E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{675BDF44-53C1-4A5F-8155-A2D6AC0F3E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{675BDF44-53C1-4A5F-8155-A2D6AC0F3E54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
