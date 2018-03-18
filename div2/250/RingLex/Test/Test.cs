@@ -55,5 +55,23 @@ namespace Test {
 
             Assert.AreEqual("dehifsfsoy", ringLex.getmin("fsdifyhsoe"));
         }
+
+        [TestMethod]
+        public void Sample8() {
+
+            Assert.AreEqual("aamuyngymzzgqpqrvocsodukdfeintuultxyexhiznorkjzowb", ringLex.getmin("ufnuxxzrzbmnmgqooketlyhnkoaugzqrcddiuteiojwayyzpvs"));
+        }
+
+        [TestMethod]
+        public void Sample9() {
+
+            Assert.AreEqual("aacftdrodzscukheewuutidffmyjrnscbzukzbiunbhiiuekvc", ringLex.getmin("cudhnefnjhaimuczfskuiduburiswtbrecuykabfcvkdzeztoi"));
+        }
+
+        [TestMethod]
+        public void Sample10() {
+
+            Assert.AreEqual("zzzzzzzzzz", ringLex.getmin("zzzzzzzzzz"));
+        }
     }
 }
