@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div2\250\RingLex\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div2\250\RingLex\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div2\250\RingLex\Test\bin\Debug\RingLex.exe
+D:\all_languages\topcoder\div2\250\RingLex\Test\bin\Debug\RingLex.pdb
+D:\all_languages\topcoder\div2\250\RingLex\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\RingLex\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div2\250\RingLex\Test\obj\Debug\Test.pdb

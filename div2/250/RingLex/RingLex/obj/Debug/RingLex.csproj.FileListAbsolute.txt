@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\250\RingLex\RingLex\bin\Debug\RingLex.exe.config
+D:\all_languages\topcoder\div2\250\RingLex\RingLex\bin\Debug\RingLex.exe
+D:\all_languages\topcoder\div2\250\RingLex\RingLex\bin\Debug\RingLex.pdb
+D:\all_languages\topcoder\div2\250\RingLex\RingLex\obj\Debug\RingLex.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\RingLex\RingLex\obj\Debug\RingLex.exe
+D:\all_languages\topcoder\div2\250\RingLex\RingLex\obj\Debug\RingLex.pdb
