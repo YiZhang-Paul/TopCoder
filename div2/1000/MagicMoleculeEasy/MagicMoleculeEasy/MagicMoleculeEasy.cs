@@ -7,146 +7,97 @@ using System.Threading.Tasks;
 namespace MagicMoleculeEasy {
     public class MagicMoleculeEasy {
 
-        private string GetKey(int atom1, int atom2) {
+        public int[] Powers { get; private set; }
+        public int[][] Edges { get; private set; }
 
-            return atom1 < atom2 ? atom1 + "," + atom2 : atom2 + "," + atom1;
+        private void Initialize(int[] powers, string[] relations) {
+
+            Powers = powers;
+            Edges = GetEdges(relations);
         }
 
-        private Dictionary<string, int[]> GetBonds(string[] relations) {
+        private string GetKey(int atom1, int atom2) {
 
-            var bonds = new Dictionary<string, int[]>();
+            int[] atoms = { atom1, atom2 };
+
+            return string.Join(",", atoms.OrderBy(value => value));
+        }
+
+        private int[][] GetEdges(string[] relations) {
+
+            var edges = new List<int[]>();
+            var keys = new HashSet<string>();
 
             for(int i = 0; i < relations.Length; i++) {
 
                 for(int j = 0; j < relations[i].Length; j++) {
 
-                    if(relations[i][j] == 'Y') {
+                    if(relations[i][j] == 'Y' && !keys.Contains(GetKey(i, j))) {
 
-                        bonds[GetKey(i, j)] = new int[] { i, j };
+                        edges.Add(new int[] { i, j });
                     }
                 }
             }
 
-            return bonds;
+            return edges.ToArray();
         }
 
-        private int SumLargestPowers(int[] powers, int total) {
+        private int[] GetUnusedPower(HashSet<int> subset) {
 
-            return powers.OrderByDescending(power => power).Take(total).Sum();
+            return Enumerable.Range(0, Powers.Length)
+                             .Where(atom => !subset.Contains(atom))
+                             .Select(atom => Powers[atom])
+                             .ToArray();
         }
 
-        private int[] GetAtoms(int total) {
+        private int SumLargest(int[] values, int total) {
 
-            return Enumerable.Range(0, total).ToArray();
+            return values.OrderByDescending(value => value)
+                         .Take(total)
+                         .Sum();
         }
 
-        private int[] GetUnused(int[] candidate, List<int> used) {
+        private int GetPower(HashSet<int> subset, int size) {
 
-            var toCheck = new HashSet<int>(used);
+            int[] unusedPower = GetUnusedPower(subset);
+            int remaining = size - subset.Count;
 
-            return candidate.Where(atom => !toCheck.Contains(atom)).ToArray();
+            return subset.Sum(atom => Powers[atom]) + SumLargest(unusedPower, remaining);
         }
 
-        private List<int> Concat(List<int> subset, int atom) {
+        private void FindMaxPower(int counter, int size, HashSet<int> subset, ref int max) {
 
-            return subset.Concat(new List<int>() { atom }).ToList();
-        }
+            if(counter == Edges.Length) {
 
-        private string[] GetUnsatisfied(string[] keys, Dictionary<string, int[]> bonds, List<int> subset) {
-
-            var used = new HashSet<int>(subset);
-
-            return keys.Where(key => bonds[key].All(atom => !used.Contains(atom))).ToArray();
-        }
-
-        private int[] RemoveIndex(int[] array, int index) {
-
-            return array.Take(index).Concat(array.Skip(index + 1)).ToArray();
-        }
-
-        private int FillToMaxPowers(List<int> subset, int toFill, int[] atoms, int[] powers) {
-
-            var unusedPower = GetUnused(atoms, subset).Select(atom => powers[atom]).ToArray();
-
-            if(toFill > unusedPower.Length) {
-
-                return -1;
-            }
-
-            return GetPower(subset, powers) + unusedPower.Take(toFill).Sum();
-        }
-
-        private int GetPower(List<int> subset, int[] powers) {
-
-            return subset.Select(atom => powers[atom]).Sum();
-        }
-
-        private void GetMaxPower(
-
-            string[] keys,
-            Dictionary<string, int[]> bonds,
-            List<int> subset,
-            int size,
-            int[] powers,
-            int[] atoms,
-            ref int max
-
-        ) {
-
-            keys = GetUnsatisfied(keys, bonds, subset);
-
-            if(keys.Length == 0) {
-
-                max = Math.Max(max, FillToMaxPowers(subset, size - subset.Count, atoms, powers));
+                max = Math.Max(max, GetPower(subset, size));
 
                 return;
             }
 
-            if(subset.Count == size) {
+            if(Edges[counter].Any(atom => subset.Contains(atom))) {
 
-                if(keys.Length == 0) {
-
-                    max = Math.Max(max, GetPower(subset, powers));
-                }
+                FindMaxPower(counter + 1, size, subset, ref max);
 
                 return;
             }
 
-            foreach(string key in keys) {
+            if(subset.Count < size) {
 
-                var unused = GetUnused(bonds[key], subset);
+                foreach(int atom in Edges[counter]) {
 
-                if(unused.Length == bonds[key].Length) {
-
-                    foreach(var atom in unused) {
-
-                        GetMaxPower(keys, bonds, Concat(subset, atom), size, powers, atoms, ref max);
-                    }
+                    var newSubset = new HashSet<int>(subset);
+                    newSubset.Add(atom);
+                    FindMaxPower(counter + 1, size, newSubset, ref max);
                 }
             }
         }
 
         public int maxMagicPower(int[] powers, string[] relations, int size) {
 
-            var bonds = GetBonds(relations);
-
-            if(bonds.Count == 0) {
-
-                return SumLargestPowers(powers, size);
-            }
-
             int max = -1;
 
-            GetMaxPower(
-
-                bonds.Select(pair => pair.Key).ToArray(),
-                bonds,
-                new List<int>(),
-                size,
-                powers,
-                GetAtoms(powers.Length),
-                ref max
-            );
+            Initialize(powers, relations);
+            FindMaxPower(0, size, new HashSet<int>(), ref max);
 
             return max;
         }
