@@ -8,17 +8,18 @@ using System.Text.RegularExpressions;
 namespace JustBrackets {
     public class JustBrackets {
 
+        //retrieve all siblings on same nested level
         private List<string> GetSiblings(string text) {
 
             var siblings = new List<string>();
 
-            for(int i = 0, start = 0, counter = 0; i < text.Length; i++) {
-
+            for(int i = 0, counter = 0, start = 0; i < text.Length; i++) {
+                //"(" -> increment counter; ")" -> decrement counter
                 counter += text[i] == '(' ? 1 : -1;
-
+                //when a matching bracket is found
                 if(counter == 0) {
 
-                    siblings.Add(text.Substring(start, i - start + 1));
+                    siblings.Add(text.Substring(start, i + 1 - start));
                     start = i + 1;
                 }
             }
@@ -31,29 +32,47 @@ namespace JustBrackets {
             return text.Length > 2 && GetSiblings(text).Count == 1;
         }
 
-        private List<string> RemoveLarger(List<string> siblings) {
+        private List<string> GetTail(List<string> list, string separator) {
 
-            string smallest = siblings.Min();
-            int lastIndex = siblings.LastIndexOf(smallest);
-            var removed = siblings.Where(sibling => sibling == smallest).ToList();
+            int head = list.LastIndexOf(separator) + 1;
+            //when separator is not found
+            if(head == 0) {
 
-            if(lastIndex != siblings.Count - 1) {
+                return list;
+            }
 
-                removed.AddRange(RemoveLarger(siblings.Skip(lastIndex + 1).ToList()));
+            return list.Skip(head).ToList();
+        }
+
+        //remove all larger siblings up to the last occurrence of current smallest sibling
+        private List<string> RemoveLargerSiblings(List<string> siblings) {
+
+            string currentMin = siblings.Min();
+            var removed = siblings.Where(sibling => sibling == currentMin).ToList();
+            //when trailing portion exists
+            if(currentMin != siblings.Last()) {
+
+                var tail = GetTail(siblings, currentMin);
+                removed.AddRange(RemoveLargerSiblings(tail));
             }
 
             return removed;
         }
 
+        private string Nest(string text) {
+
+            return "(" + text + ")";
+        }
+
+        private string UnNest(string text) {
+
+            return text.Substring(1, text.Length - 2);
+        }
+
         public string getSmallest(string text) {
 
-            if(text.Length <= 2) {
-
-                return text;
-            }
-
-            bool isNested = IsNested(text);
-            var siblings = GetSiblings(isNested ? text.Substring(1, text.Length - 2) : text);
+            bool nested = IsNested(text);
+            var siblings = GetSiblings(nested ? UnNest(text) : text);
 
             for(int i = 0; i < siblings.Count; i++) {
 
@@ -63,9 +82,9 @@ namespace JustBrackets {
                 }
             }
 
-            siblings = RemoveLarger(siblings);
+            siblings = RemoveLargerSiblings(siblings);
 
-            return isNested ? "(" + string.Join("", siblings) + ")" : siblings[0];
+            return nested ? Nest(string.Join("", siblings)) : siblings.First();
         }
     }
 }
