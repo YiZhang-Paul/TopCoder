@@ -4,3 +4,9 @@ D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\ANewHope\bin\Debug\ANewHope
 D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\ANewHope\obj\Debug\ANewHope.csprojResolveAssemblyReference.cache
 D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\ANewHope\obj\Debug\ANewHope.exe
 D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\ANewHope\obj\Debug\ANewHope.pdb
+D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\bin\Debug\ANewHope.exe.config
+D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\obj\Debug\ANewHope.exe
+D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\obj\Debug\ANewHope.pdb
+D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\bin\Debug\ANewHope.exe
+D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\bin\Debug\ANewHope.pdb
+D:\all_languages\topcoder\div1\250\ANewHope\ANewHope\obj\Debug\ANewHope.csprojResolveAssemblyReference.cache
