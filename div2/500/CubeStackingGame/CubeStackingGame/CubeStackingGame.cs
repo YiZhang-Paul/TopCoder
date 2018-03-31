@@ -9,6 +9,7 @@ namespace CubeStackingGame {
 
         private int[][] Cubes { get; set; }
 
+        //stack all cubes on top of each other
         private void GetCubes(int[] c1, int[] c2, int[] c3, int[] c4) {
 
             Cubes = new int[c1.Length][];
@@ -26,6 +27,7 @@ namespace CubeStackingGame {
             faces[index2] = total - faces[index2];
         }
 
+        //flip given cube upside down
         private void Flip(int[] faces) {
 
             Swap(faces, 1, 3);
@@ -39,12 +41,13 @@ namespace CubeStackingGame {
             }
         }
 
+        //check if current cubes can stack up to given level
         private bool CanStack(int total) {
 
             for(int i = 0; i < 4; i++) {
 
                 var used = new HashSet<int>();
-
+                //check colors on each face
                 for(int j = 0; j < total; j++) {
 
                     if(used.Contains(Cubes[j][i])) {
@@ -67,7 +70,7 @@ namespace CubeStackingGame {
 
                 return;
             }
-
+            //rotate 4 times, then flip, then rotate another 4 times
             for(int i = 0; i < 8; i++) {
 
                 if(i == 4) {
