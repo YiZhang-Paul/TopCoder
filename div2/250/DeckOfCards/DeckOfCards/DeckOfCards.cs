@@ -7,33 +7,49 @@ using System.Threading.Tasks;
 namespace DeckOfCards {
     public class DeckOfCards {
 
-        private Dictionary<int, HashSet<char>> GetCards(int[] value, string suit) {
+        private Dictionary<int, HashSet<char>> Deck { get; set; }
+        //total number of cards in deck
+        private int Total {
 
-            var cards = new Dictionary<int, HashSet<char>>();
+            get {
+
+                if(Deck == null) {
+
+                    return 0;
+                }
+
+                return Deck.Sum(pair => pair.Value.Count);
+            }
+        }
+
+        //retrieve a deck of unique cards
+        private void GetDeck(int[] value, string suit) {
+
+            Deck = new Dictionary<int, HashSet<char>>();
 
             for(int i = 0; i < value.Length; i++) {
 
-                if(!cards.ContainsKey(value[i])) {
+                if(!Deck.ContainsKey(value[i])) {
 
-                    cards[value[i]] = new HashSet<char>();
+                    Deck[value[i]] = new HashSet<char>();
                 }
 
-                cards[value[i]].Add(suit[i]);
+                Deck[value[i]].Add(suit[i]);
             }
-
-            return cards;
         }
 
-        private int CountCards(Dictionary<int, HashSet<char>> cards) {
+        //for given cards (v1, s1), (v2, s2), check if (v1, s2) and (v2, s1) also exist
+        private bool HasMutual(int[] value, string suit, int index1, int index2) {
 
-            return cards.Sum(pair => pair.Value.Count);
+            return Deck[value[index1]].Contains(suit[index2]) &&
+                   Deck[value[index2]].Contains(suit[index1]);
         }
 
         public string IsValid(int n, int[] value, string suit) {
 
-            var cards = GetCards(value, suit);
-
-            if(CountCards(cards) != n) {
+            GetDeck(value, suit);
+            //check duplicate cards
+            if(Total != n) {
 
                 return "Not perfect";
             }
@@ -42,12 +58,7 @@ namespace DeckOfCards {
 
                 for(int j = i + 1; j < value.Length; j++) {
 
-                    if(!cards[value[i]].Contains(suit[j])) {
-
-                        return "Not perfect";
-                    }
-
-                    if(!cards[value[j]].Contains(suit[i])) {
+                    if(!HasMutual(value, suit, i, j)) {
 
                         return "Not perfect";
                     }
