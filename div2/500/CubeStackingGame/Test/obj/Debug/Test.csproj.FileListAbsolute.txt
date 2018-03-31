@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\bin\Debug\CubeStackingGame.exe
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\bin\Debug\CubeStackingGame.pdb
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div2\500\CubeStackingGame\Test\obj\Debug\Test.pdb

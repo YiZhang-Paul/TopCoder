@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\500\CubeStackingGame\CubeStackingGame\bin\Debug\CubeStackingGame.exe.config
+D:\all_languages\topcoder\div2\500\CubeStackingGame\CubeStackingGame\bin\Debug\CubeStackingGame.exe
+D:\all_languages\topcoder\div2\500\CubeStackingGame\CubeStackingGame\bin\Debug\CubeStackingGame.pdb
+D:\all_languages\topcoder\div2\500\CubeStackingGame\CubeStackingGame\obj\Debug\CubeStackingGame.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\500\CubeStackingGame\CubeStackingGame\obj\Debug\CubeStackingGame.exe
+D:\all_languages\topcoder\div2\500\CubeStackingGame\CubeStackingGame\obj\Debug\CubeStackingGame.pdb
