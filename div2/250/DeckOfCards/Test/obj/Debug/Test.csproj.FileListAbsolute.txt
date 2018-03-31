@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\bin\Debug\DeckOfCards.exe
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\bin\Debug\DeckOfCards.pdb
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div2\250\DeckOfCards\Test\obj\Debug\Test.pdb
