@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\1000\TheFlippingGame2\TheFlippingGame2\bin\Debug\TheFlippingGame2.exe.config
+D:\all_languages\topcoder\div2\1000\TheFlippingGame2\TheFlippingGame2\bin\Debug\TheFlippingGame2.exe
+D:\all_languages\topcoder\div2\1000\TheFlippingGame2\TheFlippingGame2\bin\Debug\TheFlippingGame2.pdb
+D:\all_languages\topcoder\div2\1000\TheFlippingGame2\TheFlippingGame2\obj\Debug\TheFlippingGame2.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\1000\TheFlippingGame2\TheFlippingGame2\obj\Debug\TheFlippingGame2.exe
+D:\all_languages\topcoder\div2\1000\TheFlippingGame2\TheFlippingGame2\obj\Debug\TheFlippingGame2.pdb
