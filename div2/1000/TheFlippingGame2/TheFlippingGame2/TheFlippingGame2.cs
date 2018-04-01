@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 namespace TheFlippingGame2 {
     public class TheFlippingGame2 {
 
-        private char[][] FillEmpty(string[] board, bool useWhite) {
+        private Dictionary<int, HashSet<int>> Visited { get; set; }
+
+        //fill all empty tiles on board
+        private char[][] FillBoard(string[] board, bool useWhite) {
 
             char tile = useWhite ? 'w' : 'b';
 
@@ -18,87 +21,112 @@ namespace TheFlippingGame2 {
             }).ToArray();
         }
 
-        private List<int[]> GetBlock(
+        //check if given row and column exist on board
+        private bool IsOutOfBound(char[][] board, int row, int column) {
 
-            char[][] board,
-            int row,
-            int column,
-            Dictionary<int, HashSet<int>> seen,
-            List<int[]> block
+            if(row < 0 || row > board.Length - 1) {
 
-        ) {
+                return true;
+            }
 
-            if(row < 0 || column < 0 || row > board.Length - 1 || column > board[0].Length - 1) {
+            if(column < 0 || column > board[0].Length - 1) {
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsVisited(int row, int column) {
+
+            if(!Visited.ContainsKey(row)) {
+
+                return false;
+            }
+
+            return Visited[row].Contains(column);
+        }
+
+        private void AddVisited(int row, int column) {
+
+            if(!Visited.ContainsKey(row)) {
+
+                Visited[row] = new HashSet<int>();
+            }
+
+            Visited[row].Add(column);
+        }
+
+        //find a block of interconnected tiles
+        private List<int[]> FindBlock(char[][] board, int row, int column, List<int[]> block) {
+
+            if(IsOutOfBound(board, row, column) || IsVisited(row, column)) {
 
                 return null;
             }
 
-            if((seen.ContainsKey(row) && seen[row].Contains(column)) || (block.Count > 0 && board[row][column] != board[block[0][0]][block[0][1]])) {
+            char tile = board[row][column];
+
+            if(block.Count > 0 && tile != board[block[0][0]][block[0][1]]) {
 
                 return null;
             }
 
-            if(!seen.ContainsKey(row)) {
-
-                seen[row] = new HashSet<int>();
-            }
-
-            seen[row].Add(column);
+            AddVisited(row, column);
             block.Add(new int[] { row, column });
-            GetBlock(board, row + 1, column, seen, block);
-            GetBlock(board, row - 1, column, seen, block);
-            GetBlock(board, row, column + 1, seen, block);
-            GetBlock(board, row, column - 1, seen, block);
+
+            FindBlock(board, row + 1, column, block);
+            FindBlock(board, row - 1, column, block);
+            FindBlock(board, row, column + 1, block);
+            FindBlock(board, row, column - 1, block);
 
             return block;
         }
 
-        private List<List<int[]>> GetBlocks(char[][] board) {
+        //find all blocks of interconnected tiles
+        private List<List<int[]>> FindBlocks(char[][] board) {
 
-            var seen = new Dictionary<int, HashSet<int>>();
+            Visited = new Dictionary<int, HashSet<int>>();
             var blocks = new List<List<int[]>>();
 
             for(int i = 0; i < board.Length; i++) {
 
                 for(int j = 0; j < board[i].Length; j++) {
 
-                    if(seen.ContainsKey(i) && seen[i].Contains(j)) {
+                    if(IsVisited(i, j)) {
 
                         continue;
                     }
 
-                    blocks.Add(GetBlock(board, i, j, seen, new List<int[]>()));
+                    blocks.Add(FindBlock(board, i, j, new List<int[]>()));
                 }
             }
 
             return blocks;
         }
 
-        private void Flip(char[][] board, int row, int column, char tile) {
-
-            board[row][column] = tile;
-        }
-
         private void FlipBlock(char[][] board, List<int[]> block) {
 
-            char newTile = board[block[0][0]][block[0][1]] == 'b' ? 'w' : 'b';
+            char tile = board[block[0][0]][block[0][1]] == 'b' ? 'w' : 'b';
 
-            foreach(var tile in block) {
+            foreach(var grid in block) {
 
-                Flip(board, tile[0], tile[1], newTile);
+                board[grid[0]][grid[1]] = tile;
             }
         }
 
-        private int GetSteps(char[][] board, List<int[]> block, int current) {
+        //count total steps to win a game by continuously flipping a block of tiles
+        private int CountSteps(char[][] board, List<int[]> block, int minStep) {
 
             int steps = 0;
-            int total = board.Length * board[0].Length;
+            int totalGrids = board.Length * board[0].Length;
 
-            while(block.Count != total && (current == -1 || steps < current)) {
+            while(block.Count != totalGrids && (minStep < 0 || steps < minStep)) {
 
-                steps++;
                 FlipBlock(board, block);
-                block = GetBlock(board, block[0][0], block[0][1], new Dictionary<int, HashSet<int>>(), new List<int[]>());
+                Visited.Clear();
+                block = FindBlock(board, block[0][0], block[0][1], new List<int[]>());
+                steps++;
             }
 
             return steps;
@@ -109,27 +137,21 @@ namespace TheFlippingGame2 {
             return board.Select(row => row.ToArray()).ToArray();
         }
 
-        private int GetMinSteps(char[][] board) {
-
-            int minStep = -1;
-
-            foreach(var block in GetBlocks(board)) {
-
-                int steps = GetSteps(CopyBoard(board), block, minStep);
-                minStep = minStep == -1 ? steps : Math.Min(minStep, steps);
-            }
-
-            return minStep;
-        }
-
         public int MinimumMoves(int n, int m, string[] x) {
 
-            var white = FillEmpty(x, true);
-            var black = FillEmpty(x, false);
-            int minWhite = GetMinSteps(white);
-            int minBlack = GetMinSteps(black);
+            int minStep = -1;
+            var boards = new List<char[][]>() { FillBoard(x, true), FillBoard(x, false) };
 
-            return 1 + Math.Min(minWhite, minBlack);
+            foreach(var board in boards) {
+
+                foreach(var block in FindBlocks(board)) {
+
+                    int steps = CountSteps(CopyBoard(board), block, minStep);
+                    minStep = minStep == -1 ? steps : Math.Min(minStep, steps);
+                }
+            }
+
+            return minStep + 1;
         }
     }
 }
