@@ -9,7 +9,7 @@ namespace LongMansionDiv1 {
 
         private long GetHorizontalTime(int[] t, int column1, int column2, int row) {
 
-            return (long)(Math.Abs(column2 - column1) + 1) * t[row];
+            return (long)(Math.Abs(column2 - column1) - 1) * t[row];
         }
 
         private long GetVerticalTime(int[] t, int row1, int row2) {
@@ -18,7 +18,7 @@ namespace LongMansionDiv1 {
             int end = Math.Max(row1, row2);
             long time = 0;
 
-            for(int i = start + 1; i <= end; i++) {
+            for(int i = start; i <= end; i++) {
 
                 time += t[i];
             }
