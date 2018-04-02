@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div1\250\LongMansionDiv1\LongMansionDiv1\bin\Debug\LongMansionDiv1.exe.config
+D:\all_languages\topcoder\div1\250\LongMansionDiv1\LongMansionDiv1\bin\Debug\LongMansionDiv1.exe
+D:\all_languages\topcoder\div1\250\LongMansionDiv1\LongMansionDiv1\bin\Debug\LongMansionDiv1.pdb
+D:\all_languages\topcoder\div1\250\LongMansionDiv1\LongMansionDiv1\obj\Debug\LongMansionDiv1.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div1\250\LongMansionDiv1\LongMansionDiv1\obj\Debug\LongMansionDiv1.exe
+D:\all_languages\topcoder\div1\250\LongMansionDiv1\LongMansionDiv1\obj\Debug\LongMansionDiv1.pdb
