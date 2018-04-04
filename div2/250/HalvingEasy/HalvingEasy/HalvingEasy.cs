@@ -7,9 +7,29 @@ using System.Threading.Tasks;
 namespace HalvingEasy {
     public class HalvingEasy {
 
+        private bool CanDivide(int value, int target) {
+
+            if(value <= target) {
+
+                return value == target;
+            }
+
+            while(value > target) {
+
+                value /= 2;
+
+                if(value < target) {
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public int count(int[] s, int t) {
 
-            return -1;
+            return s.Count(value => CanDivide(value, t));
         }
     }
 }
