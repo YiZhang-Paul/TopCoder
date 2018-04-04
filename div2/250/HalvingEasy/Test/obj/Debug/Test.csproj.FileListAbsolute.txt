@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\bin\Debug\HalvingEasy.exe
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\bin\Debug\HalvingEasy.pdb
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div2\250\HalvingEasy\Test\obj\Debug\Test.pdb

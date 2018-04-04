@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\250\HalvingEasy\HalvingEasy\bin\Debug\HalvingEasy.exe.config
+D:\all_languages\topcoder\div2\250\HalvingEasy\HalvingEasy\bin\Debug\HalvingEasy.exe
+D:\all_languages\topcoder\div2\250\HalvingEasy\HalvingEasy\bin\Debug\HalvingEasy.pdb
+D:\all_languages\topcoder\div2\250\HalvingEasy\HalvingEasy\obj\Debug\HalvingEasy.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\HalvingEasy\HalvingEasy\obj\Debug\HalvingEasy.exe
+D:\all_languages\topcoder\div2\250\HalvingEasy\HalvingEasy\obj\Debug\HalvingEasy.pdb
