@@ -1,0 +1,7 @@
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\bin\Debug\Test.dll
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\bin\Debug\Test.pdb
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\bin\Debug\TreesAndBrackets.exe
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\bin\Debug\TreesAndBrackets.pdb
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\obj\Debug\Test.dll
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\Test\obj\Debug\Test.pdb

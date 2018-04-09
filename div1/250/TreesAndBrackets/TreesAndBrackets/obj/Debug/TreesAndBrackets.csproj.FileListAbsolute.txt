@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\TreesAndBrackets\bin\Debug\TreesAndBrackets.exe.config
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\TreesAndBrackets\bin\Debug\TreesAndBrackets.exe
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\TreesAndBrackets\bin\Debug\TreesAndBrackets.pdb
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\TreesAndBrackets\obj\Debug\TreesAndBrackets.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\TreesAndBrackets\obj\Debug\TreesAndBrackets.exe
+D:\all_languages\topcoder\div1\250\TreesAndBrackets\TreesAndBrackets\obj\Debug\TreesAndBrackets.pdb
