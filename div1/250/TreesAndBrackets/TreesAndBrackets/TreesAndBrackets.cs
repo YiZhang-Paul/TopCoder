@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 namespace TreesAndBrackets {
     public class TreesAndBrackets {
 
-        private HashSet<string> Solved { get; set; }
-
-        private string Slice(string text, int start, int end) {
-
-            return text.Substring(start, end - start + 1);
-        }
+        private Dictionary<string, bool> Solved { get; set; }
 
         private string GetFirstSibling(string tree) {
 
-            for(int i = 1, counter = 0; i < tree.Length; i++) {
+            for(int i = 0, counter = 0; i < tree.Length; i++) {
 
                 counter += tree[i] == '(' ? 1 : -1;
 
                 if(counter == 0) {
 
-                    return Slice(tree, 1, i);
+                    return tree.Substring(0, i + 1);
                 }
             }
 
-            return string.Empty;
+            return tree;
+        }
+
+        private string UnNest(string sibling) {
+
+            return sibling.Substring(1, sibling.Length - 2);
         }
 
         private bool IsContained(string t1, string t2) {
@@ -38,32 +38,28 @@ namespace TreesAndBrackets {
 
             string pair = t1 + "," + t2;
 
-            if(Solved.Contains(pair)) {
+            if(Solved.ContainsKey(pair)) {
 
-                return true;
+                return Solved[pair];
             }
 
             string firstSibling1 = GetFirstSibling(t1);
             string firstSibling2 = GetFirstSibling(t2);
-            string otherSibling1 = Slice(t1, firstSibling1.Length + 1, t1.Length - 2);
-            string otherSibling2 = Slice(t2, firstSibling2.Length + 1, t2.Length - 2);
+            string otherSibling1 = t1.Substring(firstSibling1.Length);
+            string otherSibling2 = t2.Substring(firstSibling2.Length);
 
-            bool bothContain = IsContained(firstSibling1, firstSibling2) &&
+            bool bothContain = IsContained(UnNest(firstSibling1), UnNest(firstSibling2)) &&
                                IsContained(otherSibling1, otherSibling2);
             bool otherContain = IsContained(otherSibling1, t2);
-            bool result = bothContain || otherContain;
 
-            if(result) {
+            Solved[pair] = bothContain || otherContain;
 
-                Solved.Add(pair);
-            }
-
-            return result;
+            return Solved[pair];
         }
 
         public string check(string t1, string t2) {
 
-            Solved = new HashSet<string>();
+            Solved = new Dictionary<string, bool>();
 
             return IsContained(t1, t2) ? "Possible" : "Impossible";
         }
