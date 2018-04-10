@@ -9,59 +9,66 @@ namespace TreesAndBrackets {
 
         private Dictionary<string, bool> Solved { get; set; }
 
-        private string GetFirstSibling(string tree) {
+        //retrieve all siblings on current level
+        private string GetSiblings(string node) {
 
-            for(int i = 0, counter = 0; i < tree.Length; i++) {
+            return node.Substring(1, node.Length - 2);
+        }
 
-                counter += tree[i] == '(' ? 1 : -1;
+        //retrieve leftmost sibling on current level
+        private string GetFirstSibling(string siblings) {
+
+            for(int i = 0, counter = 0; i < siblings.Length; i++) {
+
+                counter += siblings[i] == '(' ? 1 : -1;
 
                 if(counter == 0) {
 
-                    return tree.Substring(0, i + 1);
+                    return siblings.Substring(0, i + 1);
                 }
             }
 
-            return tree;
+            return siblings;
         }
 
-        private string UnNest(string sibling) {
+        private string[] GroupSiblings(string siblings) {
 
-            return sibling.Substring(1, sibling.Length - 2);
+            string first = GetFirstSibling(siblings);
+            string other = siblings.Substring(first.Length);
+
+            return new string[] { first, other };
         }
 
-        private bool IsContained(string t1, string t2) {
+        //check if node can be reduced to given form
+        private bool CanReduce(string current, string target) {
 
-            if(t1 == string.Empty || t2 == string.Empty) {
+            if(current == string.Empty || target == string.Empty) {
 
-                return t2 == string.Empty;
+                return target == string.Empty;
             }
 
-            string pair = t1 + "," + t2;
+            string toSolve = current + "," + target;
 
-            if(Solved.ContainsKey(pair)) {
+            if(Solved.ContainsKey(toSolve)) {
 
-                return Solved[pair];
+                return Solved[toSolve];
             }
+            //pick out first sibling
+            string[] group1 = GroupSiblings(current);
+            string[] group2 = GroupSiblings(target);
 
-            string firstSibling1 = GetFirstSibling(t1);
-            string firstSibling2 = GetFirstSibling(t2);
-            string otherSibling1 = t1.Substring(firstSibling1.Length);
-            string otherSibling2 = t2.Substring(firstSibling2.Length);
+            Solved[toSolve] = (CanReduce(GetSiblings(group1[0]), GetSiblings(group2[0])) &&
+                               CanReduce(group1[1], group2[1])) ||
+                               CanReduce(group1[1], target);
 
-            bool bothContain = IsContained(UnNest(firstSibling1), UnNest(firstSibling2)) &&
-                               IsContained(otherSibling1, otherSibling2);
-            bool otherContain = IsContained(otherSibling1, t2);
-
-            Solved[pair] = bothContain || otherContain;
-
-            return Solved[pair];
+            return Solved[toSolve];
         }
 
         public string check(string t1, string t2) {
 
             Solved = new Dictionary<string, bool>();
 
-            return IsContained(t1, t2) ? "Possible" : "Impossible";
+            return CanReduce(t1, t2) ? "Possible" : "Impossible";
         }
     }
 }
