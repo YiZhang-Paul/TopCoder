@@ -7,14 +7,31 @@ using System.Threading.Tasks;
 namespace MinimizeAbsoluteDifferenceDiv2 {
     public class MinimizeAbsoluteDifferenceDiv2 {
 
-        private double CalculateValue(int[] indexes, int[] numbers) {
+        private List<int> Include(List<int> list, int element) {
 
-            return Math.Abs((double)numbers[indexes[0]] / numbers[indexes[1]] - numbers[indexes[2]]);
+            return list.Concat(new int[] { element }).ToList();
         }
 
-        private void FindMin(int[] indexes, int[] numbers, List<int> current, ref int[] min) {
+        //exclude value at given index
+        private int[] Exclude(int[] values, int index) {
 
-            if(current.Count == numbers.Length) {
+            return values.Take(index).Concat(values.Skip(index + 1)).ToArray();
+        }
+
+        //evaluate expression abs(a / b - c)
+        private double Evaluate(int[] indexes, int[] values) {
+
+            return Math.Abs((double)values[indexes[0]] / values[indexes[1]] - values[indexes[2]]);
+        }
+
+        private bool IsSmaller(int[] toTest, int[] min, int[] values) {
+
+            return Evaluate(toTest, values) < Evaluate(min, values);
+        }
+
+        private void FindMinDifference(int[] indexes, int[] values, List<int> current, ref int[] min) {
+
+            if(current.Count == values.Length) {
 
                 if(min == null) {
 
@@ -22,7 +39,7 @@ namespace MinimizeAbsoluteDifferenceDiv2 {
                 }
                 else {
 
-                    min = CalculateValue(current.ToArray(), numbers) < CalculateValue(min, numbers) ? current.ToArray() : min;
+                    min = IsSmaller(current.ToArray(), min, values) ? current.ToArray() : min;
                 }
 
                 return;
@@ -30,20 +47,21 @@ namespace MinimizeAbsoluteDifferenceDiv2 {
 
             for(int i = 0; i < indexes.Length; i++) {
 
-                int[] others = indexes.Take(i).Concat(indexes.Skip(i + 1)).ToArray();
-                var newCurrent = current.ToList();
-                newCurrent.Add(indexes[i]);
-                FindMin(others, numbers, newCurrent, ref min);
+                FindMinDifference(Exclude(indexes, i), values, Include(current, indexes[i]), ref min);
             }
         }
 
         public int[] findTriple(int x0, int x1, int x2) {
 
-            int[] indexes = Enumerable.Range(0, 3).ToArray();
-            int[] numbers = { x0, x1, x2 };
             int[] min = null;
 
-            FindMin(indexes, numbers, new List<int>(), ref min);
+            FindMinDifference(
+
+                Enumerable.Range(0, 3).ToArray(),
+                new int[] { x0, x1, x2 },
+                new List<int>(),
+                ref min
+            );
 
             return min;
         }
