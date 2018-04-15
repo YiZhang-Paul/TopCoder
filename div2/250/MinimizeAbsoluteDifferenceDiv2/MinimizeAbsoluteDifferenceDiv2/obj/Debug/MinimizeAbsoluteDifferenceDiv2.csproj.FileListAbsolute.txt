@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\250\MinimizeAbsoluteDifferenceDiv2\MinimizeAbsoluteDifferenceDiv2\bin\Debug\MinimizeAbsoluteDifferenceDiv2.exe.config
+D:\all_languages\topcoder\div2\250\MinimizeAbsoluteDifferenceDiv2\MinimizeAbsoluteDifferenceDiv2\bin\Debug\MinimizeAbsoluteDifferenceDiv2.exe
+D:\all_languages\topcoder\div2\250\MinimizeAbsoluteDifferenceDiv2\MinimizeAbsoluteDifferenceDiv2\bin\Debug\MinimizeAbsoluteDifferenceDiv2.pdb
+D:\all_languages\topcoder\div2\250\MinimizeAbsoluteDifferenceDiv2\MinimizeAbsoluteDifferenceDiv2\obj\Debug\MinimizeAbsoluteDifferenceDiv2.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\250\MinimizeAbsoluteDifferenceDiv2\MinimizeAbsoluteDifferenceDiv2\obj\Debug\MinimizeAbsoluteDifferenceDiv2.exe
+D:\all_languages\topcoder\div2\250\MinimizeAbsoluteDifferenceDiv2\MinimizeAbsoluteDifferenceDiv2\obj\Debug\MinimizeAbsoluteDifferenceDiv2.pdb
