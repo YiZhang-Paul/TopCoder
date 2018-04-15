@@ -10,7 +10,7 @@ namespace Test {
 
         private bool IsValidPath(string[] edges, int[] path) {
 
-            for(int i = 0, current = path[0]; i < path.Length - 1; i++) {
+            for(int i = 0; i < path.Length - 1; i++) {
 
                 if(edges[path[i]][path[i + 1]] != '+') {
 

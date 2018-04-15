@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 namespace HamiltonianPathsInGraph {
     public class HamiltonianPathsInGraph {
 
-        private bool IsConnected(int node1, int node2, string[] X) {
+        private bool IsConnected(int node1, int node2, string[] edges) {
 
-            return X[node1][node2] == '+';
+            return edges[node1][node2] == '+';
         }
 
-        private bool InsertAtStart(int node, string[] X, List<int> route) {
+        private bool InsertAtStart(int node, string[] edges, List<int> route) {
 
-            if(!IsConnected(node, route.First(), X)) {
+            if(!IsConnected(node, route.First(), edges)) {
 
                 return false;
             }
@@ -24,9 +24,9 @@ namespace HamiltonianPathsInGraph {
             return true;
         }
 
-        private bool InsertAtEnd(int node, string[] X, List<int> route) {
+        private bool InsertAtEnd(int node, string[] edges, List<int> route) {
 
-            if(!IsConnected(route.Last(), node, X)) {
+            if(!IsConnected(route.Last(), node, edges)) {
 
                 return false;
             }
@@ -36,11 +36,11 @@ namespace HamiltonianPathsInGraph {
             return true;
         }
 
-        private bool InsertInMiddle(int node, string[] X, List<int> route) {
+        private bool InsertInMiddle(int node, string[] edges, List<int> route) {
 
             for(int i = 1; i < route.Count; i++) {
 
-                if(IsConnected(route[i - 1], node, X) && IsConnected(node, route[i], X)) {
+                if(IsConnected(route[i - 1], node, edges) && IsConnected(node, route[i], edges)) {
 
                     route.Insert(i, node);
 
@@ -51,33 +51,33 @@ namespace HamiltonianPathsInGraph {
             return false;
         }
 
-        private bool Insert(int node, string[] X, List<int> route) {
+        private bool Insert(int node, string[] edges, List<int> route) {
 
-            if(InsertAtEnd(node, X, route)) {
-
-                return true;
-            }
-
-            if(InsertAtStart(node, X, route)) {
+            if(InsertAtEnd(node, edges, route)) {
 
                 return true;
             }
 
-            return InsertInMiddle(node, X, route);
+            if(InsertAtStart(node, edges, route)) {
+
+                return true;
+            }
+
+            return InsertInMiddle(node, edges, route);
         }
 
         public int[] findPath(string[] X) {
 
-            var route = X[0][1] == '+' ? new List<int>() { 0, 1 } : new List<int>() { 1, 0 };
-            var others = new HashSet<int>(Enumerable.Range(2, X.Length - 2));
+            var route = new List<int>() { 0 };
+            var nodes = new HashSet<int>(Enumerable.Range(1, X.Length - 1));
 
-            while(others.Count > 0) {
+            while(nodes.Count > 0) {
 
-                foreach(int node in others.ToList()) {
+                foreach(int node in nodes.ToList()) {
 
                     if(Insert(node, X, route)) {
 
-                        others.Remove(node);
+                        nodes.Remove(node);
                     }
                 }
             }
