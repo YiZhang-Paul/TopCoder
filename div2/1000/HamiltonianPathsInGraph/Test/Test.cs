@@ -8,6 +8,19 @@ namespace Test {
 
         HamiltonianPathsInGraph.HamiltonianPathsInGraph path;
 
+        private bool IsValidPath(string[] edges, int[] path) {
+
+            for(int i = 0, current = path[0]; i < path.Length - 1; i++) {
+
+                if(edges[path[i]][path[i + 1]] != '+') {
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         [TestInitialize]
         public void Setup() {
 
@@ -19,7 +32,7 @@ namespace Test {
 
             string[] edges = { ".+", "-." };
 
-            CollectionAssert.AreEqual(new int[] { 0, 1 }, path.findPath(edges));
+            Assert.IsTrue(IsValidPath(edges, path.findPath(edges)));
         }
 
         [TestMethod]
@@ -27,7 +40,7 @@ namespace Test {
 
             string[] edges = { ".++", "-.+", "--." };
 
-            CollectionAssert.AreEqual(new int[] { 0, 1, 2 }, path.findPath(edges));
+            Assert.IsTrue(IsValidPath(edges, path.findPath(edges)));
         }
 
         [TestMethod]
@@ -35,7 +48,7 @@ namespace Test {
 
             string[] edges = { ".--+", "+.+-", "+-.-", "-++." };
 
-            CollectionAssert.AreEqual(new int[] { 3, 1, 2, 0 }, path.findPath(edges));
+            Assert.IsTrue(IsValidPath(edges, path.findPath(edges)));
         }
 
         [TestMethod]
@@ -43,7 +56,7 @@ namespace Test {
 
             string[] edges = { ".+-+", "-.+-", "+-.-", "-++." };
 
-            CollectionAssert.AreEqual(new int[] { 3, 2, 0, 1 }, path.findPath(edges));
+            Assert.IsTrue(IsValidPath(edges, path.findPath(edges)));
         }
 
         [TestMethod]
@@ -51,7 +64,7 @@ namespace Test {
 
             string[] edges = { ".++--", "-.-++", "-+.+-", "+--.+", "+-+-." };
 
-            CollectionAssert.AreEqual(new int[] { 3, 0, 2, 1, 4 }, path.findPath(edges));
+            Assert.IsTrue(IsValidPath(edges, path.findPath(edges)));
         }
     }
 }
