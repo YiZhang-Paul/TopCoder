@@ -1,0 +1,6 @@
+D:\all_languages\topcoder\div2\500\BuildingSpanningTreesDiv2\BuildingSpanningTreesDiv2\bin\Debug\BuildingSpanningTreesDiv2.exe.config
+D:\all_languages\topcoder\div2\500\BuildingSpanningTreesDiv2\BuildingSpanningTreesDiv2\bin\Debug\BuildingSpanningTreesDiv2.exe
+D:\all_languages\topcoder\div2\500\BuildingSpanningTreesDiv2\BuildingSpanningTreesDiv2\bin\Debug\BuildingSpanningTreesDiv2.pdb
+D:\all_languages\topcoder\div2\500\BuildingSpanningTreesDiv2\BuildingSpanningTreesDiv2\obj\Debug\BuildingSpanningTreesDiv2.csprojResolveAssemblyReference.cache
+D:\all_languages\topcoder\div2\500\BuildingSpanningTreesDiv2\BuildingSpanningTreesDiv2\obj\Debug\BuildingSpanningTreesDiv2.exe
+D:\all_languages\topcoder\div2\500\BuildingSpanningTreesDiv2\BuildingSpanningTreesDiv2\obj\Debug\BuildingSpanningTreesDiv2.pdb
